@@ -12,7 +12,7 @@ import org.springframework.web.servlet.view.JstlView;
 
 @Configuration
 @EnableWebMvc
-@ComponentScan({"org.books.controller"})
+@ComponentScan({"org.books.controller", "org.books.config", "org.books.service"})
 public class WebConfig extends WebMvcConfigurerAdapter {
 
     @Bean
