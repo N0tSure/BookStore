@@ -1,3 +1,5 @@
+package org.books.controller;
+
 import org.books.controller.ApplicationController;
 import org.junit.Test;
 import org.springframework.test.web.servlet.MockMvc;
