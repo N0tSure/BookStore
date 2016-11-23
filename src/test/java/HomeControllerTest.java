@@ -5,7 +5,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 
-public class HoneControllerTest {
+public class HomeControllerTest {
     @Test
     public void testHomePage() throws Exception {
         ApplicationController appController = new ApplicationController();
