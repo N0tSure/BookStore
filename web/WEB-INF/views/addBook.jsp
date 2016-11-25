@@ -5,7 +5,7 @@
     <link rel="stylesheet" href="./css/bootstrap.min.css">
     <link rel="stylesheet" href="./css/bootstrap-theme.min.css">
     <script src="./js/store-script.js">
-        working = '${pageContext.request.contextPath}';
+        setWorkingDir('${pageContext.request.contextPath}');
     </script>
 </head>
 <body>
@@ -34,8 +34,12 @@
                     <input type="text" class="form-control" id="price">
                 </div>
                 <button onclick="saveNewBook()" type="button" class="btn-md btn-primary">Save</button>
+                <a href="${pageContext.request.contextPath}/">
+                    <button type="button" class="btn-md btn-default">Back</button>
+                </a>
             </div>
         </div>
+        <div id="warningsArea"></div>
     </div>
 </body>
 </html>
