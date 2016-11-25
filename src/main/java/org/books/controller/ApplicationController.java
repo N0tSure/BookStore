@@ -8,7 +8,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 public class ApplicationController {
     @RequestMapping("/")
     public String home(Model model) {
-        model.addAttribute("basic", "It's works!");
         return "home";
+    }
+
+    @RequestMapping("/new")
+    public String newBook(Model model) {
+        return "addBook";
     }
 }
