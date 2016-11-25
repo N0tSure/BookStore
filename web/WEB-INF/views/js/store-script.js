@@ -23,6 +23,8 @@ function refresh() {
 
 // Print all books
 function printAll(rawJson) {
+
+    if (working==null) working = '';
     var books = JSON.parse(rawJson);
     var out = "";
     var i;
@@ -34,8 +36,9 @@ function printAll(rawJson) {
                 + books[i].pages + '</th></tr><tr><th>Price</th><th>'
                 + books[i].price + '</th></tr><tr><th>ISBN</th><th>'
                 + books[i].isbn +
-                '</th></tr></tbody></table></div><div class="col-sm-8 pull-right">' +
-                '<button type="button" class="btn-sm btn-primary">Update</button><br>' +
+                '</th></tr></tbody></table></div><a class="col-sm-8 pull-right">' +
+                '<a href="' + working + '/update?bookId='
+                + books[i].id + '"><button type="button" class="btn-sm btn-primary">Update</button></a>' +
                 '<button onclick="removeBook('
                 + books[i].id + ')" type="button" class="btn-sm btn-danger">Delete</button></div></div></div></div>';
     }
