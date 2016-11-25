@@ -1,5 +1,7 @@
 package org.books.model;
 
+import org.hibernate.annotations.Type;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -12,6 +14,8 @@ public class Book {
     private Long id;
     private String title;
     private Float price;
+
+    @Type(type = "org.hibernate.type.TextType")
     private String description;
     private String isbn;
     private Integer pages;
