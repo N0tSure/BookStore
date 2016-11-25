@@ -7,7 +7,7 @@
     <link rel="stylesheet" href="./css/bootstrap.min.css">
     <link rel="stylesheet" href="./css/bootstrap-theme.min.css">
     <script src="./js/store-script.js">
-        working = '${pageContext.request.contextPath}';
+        setWorkingDir(${pageContext.request.contextPath});
     </script>
 </head>
 <body onload="loadAll(${pageContext.request.contextPath})">
@@ -18,10 +18,11 @@
                 There you can view all available books, remove and update some one.
             </p>
             <p>
-                <button type="button" class="btn-md btn-primary">Add book</button>
-                <button type="button" class="btn-md btn-primary">Refresh</button>
+                <a href="${pageContext.request.contextPath}/new"><button type="button" class="btn-md btn-primary">Add book</button></a>
+                <button onclick="refresh()" type="button" class="btn-md btn-primary">Refresh</button>
             </p>
         </div>
+        <div id="warningsArea"></div>
         <div id="bookWell" class="well">
             <!-- Books will load there -->
         </div>
