@@ -11,7 +11,7 @@
 <body>
 <div class="container">
     <div class="panel panel-primary">
-        <div class="panel-heading">Input attributes of new book</div>
+        <div class="panel-heading">Input attributes of book that need to update</div>
         <div class="panel-body">
             <form:form method="post" modelAttribute="book">
                 <fieldset>

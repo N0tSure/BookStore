@@ -4,9 +4,7 @@
     <title>Add new book</title>
     <link rel="stylesheet" href="./css/bootstrap.min.css">
     <link rel="stylesheet" href="./css/bootstrap-theme.min.css">
-    <script src="./js/store-script.js">
-        setWorkingDir('${pageContext.request.contextPath}');
-    </script>
+    <script src="./js/store-script.js"></script>
 </head>
 <body>
     <div class="container">
@@ -33,7 +31,7 @@
                     <label for="price">Price:</label>
                     <input type="text" class="form-control" id="price">
                 </div>
-                <button onclick="saveNewBook()" type="button" class="btn-md btn-primary">Save</button>
+                <button onclick="saveNewBook(&apos;${pageContext.request.contextPath}&apos;)" type="button" class="btn-md btn-primary">Save</button>
                 <a href="${pageContext.request.contextPath}/">
                     <button type="button" class="btn-md btn-default">Back</button>
                 </a>

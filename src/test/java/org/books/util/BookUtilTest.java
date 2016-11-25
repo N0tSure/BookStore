@@ -91,7 +91,7 @@ public class BookUtilTest {
     @Transactional
     public void gettingAllTest() {
         List<Book> books = new ArrayList<>();
-        books.add(new Book("Thinking in Java",10.1f,"desc","jjy",1100));
+        books.add(new Book("Thinking in Java",10.3f,"desc","jjy",1100));
         books.add(new Book("Head First HTML5",18.3f,"html","jjy",800));
         books.add(new Book("Spring in Action", 15.2f, "description","rryhh",600));
 
@@ -100,8 +100,8 @@ public class BookUtilTest {
         }
 
         List<Book> obtainedBooks = bookUtil.getAll();
-        for (Book book : obtainedBooks) {
-            if (!books.contains(book)) fail();
+        for (Book book : books) {
+            if (!obtainedBooks.contains(book)) fail(book.toString());
         }
     }
 }

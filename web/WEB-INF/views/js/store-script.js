@@ -1,13 +1,12 @@
-var working;
 
 // Call books from db
-function loadAll() {
+function loadAll(working) {
     if (working==null) working = '';
     var service = working + '/book/all';
     var xmlHttp = new XMLHttpRequest();
     xmlHttp.onreadystatechange = function () {
         if (this.readyState == 4 && this.status == 200) {
-            printAll(this.responseText);
+            printAll(this.responseText, working);
         }
     };
 
@@ -16,13 +15,14 @@ function loadAll() {
 }
 
 // Refresh boot out puts
-function refresh() {
+function refresh(working) {
     document.getElementById("bookWell").innerHTML = '';
-    loadAll();
+    document.getElementById("warningsArea").innerHTML = '';
+    loadAll(working);
 }
 
 // Print all books
-function printAll(rawJson) {
+function printAll(rawJson, working) {
 
     if (working==null) working = '';
     var books = JSON.parse(rawJson);
@@ -40,13 +40,13 @@ function printAll(rawJson) {
                 '<a href="' + working + '/update?bookId='
                 + books[i].id + '"><button type="button" class="btn-sm btn-primary">Update</button></a>' +
                 '<button onclick="removeBook('
-                + books[i].id + ')" type="button" class="btn-sm btn-danger">Delete</button></div></div></div></div>';
+                + books[i].id + ',&apos;' + working + '&apos;)" type="button" class="btn-sm btn-danger">Delete</button></div></div></div></div>';
     }
     document.getElementById("bookWell").innerHTML = out;
 }
 
 // Saving new book in DB
-function saveNewBook() {
+function saveNewBook(working) {
 
     if (working==null) working = '';
     var service = working + '/book/add';
@@ -98,14 +98,14 @@ function saveNewBook() {
 }
 
 // Removing book from db
-function removeBook(bookId) {
+function removeBook(bookId, working) {
 
     if (working==null) working = '';
     var service = working + '/book/remove';
     var xmlHttp = new XMLHttpRequest();
     xmlHttp.onreadystatechange = function () {
         if (this.readyState == 4 && this.status == 200) {
-            refresh();
+            refresh(working);
             okStateNote(this.responseText);
         } else {
             errorState(this.responseText);

@@ -10,7 +10,7 @@
         setWorkingDir(${pageContext.request.contextPath});
     </script>
 </head>
-<body onload="loadAll(${pageContext.request.contextPath})">
+<body onload="loadAll(&apos;${pageContext.request.contextPath}&apos;)">
     <div class="container">
         <div class="jumbotron">
             <h2>Available books</h2>
@@ -19,7 +19,7 @@
             </p>
             <p>
                 <a href="${pageContext.request.contextPath}/new"><button type="button" class="btn-md btn-primary">Add book</button></a>
-                <button onclick="refresh()" type="button" class="btn-md btn-primary">Refresh</button>
+                <button onclick="refresh(&apos;${pageContext.request.contextPath}&apos;)" type="button" class="btn-md btn-primary">Refresh</button>
             </p>
         </div>
         <div id="warningsArea"></div>
