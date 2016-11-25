@@ -1,12 +1,13 @@
-var working = "";
+var working;
 
-function loadAll(workingDir) {
-    if (workingDir==null) workingDir = '';
-    var service = workingDir + '/book/all';
+// Call books from db
+function loadAll() {
+    if (working==null) working = '';
+    var service = working + '/book/all';
     var xmlHttp = new XMLHttpRequest();
     xmlHttp.onreadystatechange = function () {
         if (this.readyState == 4 && this.status == 200) {
-            printAll(this.responseText, workingDir);
+            printAll(this.responseText);
         }
     };
 
@@ -14,7 +15,14 @@ function loadAll(workingDir) {
      xmlHttp.send();
 }
 
-function printAll(rawJson, workingDir) {
+// Refresh boot out puts
+function refresh() {
+    document.getElementById("bookWell").innerHTML = '';
+    loadAll();
+}
+
+// Print all books
+function printAll(rawJson) {
     var books = JSON.parse(rawJson);
     var out = "";
     var i;
@@ -28,12 +36,16 @@ function printAll(rawJson, workingDir) {
                 + books[i].isbn +
                 '</th></tr></tbody></table></div><div class="col-sm-8 pull-right">' +
                 '<button type="button" class="btn-sm btn-primary">Update</button><br>' +
-                '<button type="button" class="btn-sm btn-danger">Delete</button></div></div>';
+                '<button onclick="removeBook('
+                + books[i].id + ')" type="button" class="btn-sm btn-danger">Delete</button></div></div></div></div>';
     }
     document.getElementById("bookWell").innerHTML = out;
 }
 
+// Saving new book in DB
 function saveNewBook() {
+
+    if (working==null) working = '';
     var service = working + '/book/add';
     var digitPat = /\d+/;
     var floatPat = /\d+\.\d{0}/;
@@ -69,6 +81,47 @@ function saveNewBook() {
     };
 
     var json = JSON.stringify(Book);
+    var xmlHttp = new XMLHttpRequest();
+    xmlHttp.onreadystatechange = function () {
+        if (this.readyState == 4 && this.status == 200) {
+            okStateNote(this.responseText);
+        } else {
+            errorState(this.responseText);
+        }
+    };
 
-    alert(json);
+    xmlHttp.open("POST", service, true);
+    xmlHttp.send(json);
+}
+
+// Removing book from db
+function removeBook(bookId) {
+
+    if (working==null) working = '';
+    var service = working + '/book/remove';
+    var xmlHttp = new XMLHttpRequest();
+    xmlHttp.onreadystatechange = function () {
+        if (this.readyState == 4 && this.status == 200) {
+            refresh();
+            okStateNote(this.responseText);
+        } else {
+            errorState(this.responseText);
+        }
+    };
+
+    xmlHttp.open("POST", service, true);
+    xmlHttp.send(bookId);
+}
+
+function setWorkingDir(workingDir) {
+    if (workingDir == null) working = '';
+    else working = workingDir;
+}
+
+function errorState(msg) {
+    document.getElementById("warningsArea").innerHTML = '<div class="alert alert-warning">' + msg + '</div>';
+}
+
+function okStateNote(msg) {
+    document.getElementById("warningsArea").innerHTML = '<div class="alert alert-success">' + msg + '</div>';
 }
