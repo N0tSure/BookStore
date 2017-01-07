@@ -1,5 +1,6 @@
 
-// Call books from db
+// Call books from database
+// Taking working directory path as parameter
 function loadAll(working) {
     if (working==null) working = '';
     var service = working + '/book/all';
@@ -14,14 +15,14 @@ function loadAll(working) {
      xmlHttp.send();
 }
 
-// Refresh boot out puts
+// Refresh listed book
 function refresh(working) {
     document.getElementById("bookWell").innerHTML = '';
     document.getElementById("warningsArea").innerHTML = '';
     loadAll(working);
 }
 
-// Print all books
+// Prints all books
 function printAll(rawJson, working) {
 
     if (working==null) working = '';
@@ -45,7 +46,7 @@ function printAll(rawJson, working) {
     document.getElementById("bookWell").innerHTML = out;
 }
 
-// Saving new book in DB
+// Validates books attributes and saves new book in DB
 function saveNewBook(working) {
 
     if (working==null) working = '';

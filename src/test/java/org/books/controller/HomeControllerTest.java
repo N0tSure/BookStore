@@ -1,12 +1,12 @@
 package org.books.controller;
 
-import org.books.controller.ApplicationController;
 import org.junit.Test;
 import org.springframework.test.web.servlet.MockMvc;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 
+/* Test for homepage view*/
 public class HomeControllerTest {
     @Test
     public void testHomePage() throws Exception {

@@ -18,6 +18,7 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.ArrayList;
 import java.util.List;
 
+/* In this test, checks DAO work with entities */
 @RunWith(SpringJUnit4ClassRunner.class)
 @WebAppConfiguration
 @ContextConfiguration(classes = {ApplicationConfig.class, RootConfig.class, WebConfig.class, HibernateConfig.class})
@@ -26,6 +27,8 @@ public class BookUtilTest {
     @Autowired
     private BookUtil bookUtil;
 
+    /* Check equals method of entity, for passing
+     * first and same must be equals, and first and another didn't */
     @Test
     public void equalsTest() {
         Book first = new Book("Thinking in Java",10.1f,"desc","jjy",1100);
@@ -41,6 +44,7 @@ public class BookUtilTest {
         assertNotEquals(first, another);
     }
 
+    /* There testing saving and loading entity from database */
     @Test
     @Rollback
     @Transactional
@@ -52,11 +56,14 @@ public class BookUtilTest {
         assertEquals(original, obtained);
     }
 
+    /* Check of book's update, for success pass another Book
+    * must be equals obtained, but same not */
     @Test
     @Rollback
     @Transactional
     public void updateTest() {
         Book original = new Book("Thinking in Java",10.1f,"desc","jjy",1100);
+        // Same to original
         Book same = new Book(
                 original.getTitle(),
                 original.getPrice(),
@@ -74,6 +81,7 @@ public class BookUtilTest {
         assertNotEquals(same, bookUtil.get(original.getId()));
     }
 
+    /* Test for delete exists entity, for pass removed must equals null */
     @Test
     @Rollback
     @Transactional
@@ -86,6 +94,8 @@ public class BookUtilTest {
         assertNull(removed);
     }
 
+    /* Test for getting list of book, for pass all entities
+    * from book, must contain in obtained list */
     @Test
     @Rollback
     @Transactional

@@ -22,22 +22,29 @@ public class ApplicationController {
         this.util = bookUtil;
     }
 
+    // home page mapping
     @RequestMapping("/")
     public String home(Model model) {
         return "home";
     }
 
+    /* New element creation page mapping */
     @RequestMapping("/new")
     public String newBook(Model model) {
         return "addBook";
     }
 
+    /* Receives @param Book object, which is a
+    * updated element, and save it */
     @RequestMapping(value = "/update", method = RequestMethod.POST)
     public String updateBook(@ModelAttribute("book")Book book, Model model) {
         util.update(book);
         return "updateBook";
     }
 
+    /* Return page for update, request parameter is a identifier of
+    * already existed element, finds element from database by id,
+    * and give this object as attribute for page */
     @RequestMapping(value = "/update", method = RequestMethod.GET)
     public String getUpdateForm(@RequestParam(value = "bookId") long bookId, Model model) {
         Book book = util.get(bookId);

@@ -9,6 +9,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
+/* DAO class for working with entities */
 @Repository
 @Transactional
 public class BookUtil {
@@ -19,17 +20,20 @@ public class BookUtil {
         this.sessionFactory = sessionFactory;
     }
 
+    // Saves new book in database
     public void add(Book book) {
         Session session = sessionFactory.getCurrentSession();
         session.save(book);
         session.flush();
     }
 
+    // Finds book by it's id
     public Book get(Long id) {
         Session session = sessionFactory.getCurrentSession();
         return session.get(Book.class, id);
     }
 
+    // Updates already existed book
     public void update(Book book) {
         Book oldOne = sessionFactory.getCurrentSession().get(Book.class, book.getId());
         oldOne.setTitle(book.getTitle());
@@ -41,6 +45,7 @@ public class BookUtil {
         sessionFactory.getCurrentSession().flush();
     }
 
+    // Removes book by it's id
     public void delete(Long id) {
         Session session = sessionFactory.getCurrentSession();
         Book willDelete = this.get(id);
@@ -48,6 +53,7 @@ public class BookUtil {
         session.flush();
     }
 
+    // Gives list of all books
     @SuppressWarnings("unchecked")
     public List<Book> getAll() {
         Session session = sessionFactory.getCurrentSession();

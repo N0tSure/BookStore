@@ -23,6 +23,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+/* There will testing service class */
 @RunWith(SpringJUnit4ClassRunner.class)
 @WebAppConfiguration
 @ContextConfiguration(classes = {ApplicationConfig.class, WebConfig.class, HibernateConfig.class})
@@ -41,6 +42,9 @@ public class BookServiceTest {
         if (mapper == null) mapper = new ObjectMapper();
     }
 
+    /* Test for getting list of book
+    * for success all saving element into books
+    * must be contained in obtained list from database */
     @Test
     @Rollback
     @Transactional
@@ -62,6 +66,8 @@ public class BookServiceTest {
                 deSerialized.containsAll(books));
     }
 
+    /* Test for saving book into database, for successful
+    * pass of test response must contain success message */
     @Test
     @Rollback
     @Transactional
@@ -74,6 +80,8 @@ public class BookServiceTest {
                 response.contains("successful"));
     }
 
+    /* Test for updating and removing existed entity for
+    * for successful pass responses must contain success message */
     @Test
     @Rollback
     @Transactional

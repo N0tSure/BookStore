@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 
 import java.io.IOException;
 
+/* Allows work with DAO, Book entities and JSON messages */
 @Service
 public class BookService {
 
@@ -22,6 +23,8 @@ public class BookService {
         this.mapper = new ObjectMapper();
     }
 
+    /* This method allows get list of all books and
+    * @return list of entities in JSON format */
     public String getAllBooks() {
         String result;
         try {
@@ -32,6 +35,8 @@ public class BookService {
         return result;
     }
 
+    /* Take string as @param which is JSON format
+    * entity, @return success or error message consequently */
     public String addBook(String json) {
         try {
             Book book = mapper.readValue(json, Book.class);
@@ -42,6 +47,7 @@ public class BookService {
         return "Book's saving has been successful";
     }
 
+    /* Remove some book, by given @param which is it's id */
     public String removeBook(String request) {
         Long id;
         try {
@@ -53,6 +59,9 @@ public class BookService {
         return "Book successfully removed";
     }
 
+    /* Updates already existing book, taken as @param
+    * representation of entity in JSON format,
+    * @return success or error message consequently */
     public String updateBook(String json) {
         try {
             Book book = mapper.readValue(json, Book.class);
